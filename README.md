@@ -12,7 +12,7 @@ Both cover the same necessities.
 ![demo example](./assets/demo.gif)
 
 ## Jalapeno 2 - How to sync fork
-[https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork]
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork
 
 ## Features
 - No dependencies
