@@ -22,6 +22,9 @@
         "paths": {
             "@katoid/angular-grid-layout": [
                 "dist/angular-grid-layout"
+            ],
+            "jal-angular-grid-layout": [
+              "dist/jal-angular-grid-layout"
             ]
         }
     },

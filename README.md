@@ -13,6 +13,9 @@ Both cover the same necessities.
 
 ## Jalapeno 2 - How to sync fork
 [https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork]
+npm build
+cd dist/angular-grid-layout
+npm pack
 
 ## Features
 - No dependencies

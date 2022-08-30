@@ -172,6 +172,46 @@
           }
         }
       }
+    },
+    "jal-angular-grid-layout": {
+      "projectType": "library",
+      "root": "projects/jal-angular-grid-layout",
+      "sourceRoot": "projects/jal-angular-grid-layout/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/jal-angular-grid-layout/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/jal-angular-grid-layout/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/jal-angular-grid-layout/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/jal-angular-grid-layout/src/test.ts",
+            "tsConfig": "projects/jal-angular-grid-layout/tsconfig.spec.json",
+            "karmaConfig": "projects/jal-angular-grid-layout/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/jal-angular-grid-layout/**/*.ts",
+              "projects/jal-angular-grid-layout/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
