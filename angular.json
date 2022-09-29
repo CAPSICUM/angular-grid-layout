@@ -179,10 +179,17 @@
       "sourceRoot": "projects/jal-angular-grid-layout/src",
       "prefix": "lib",
       "architect": {
+
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/jal-angular-grid-layout/ng-package.json"
+            "project": "projects/jal-angular-grid-layout/ng-package.json",
+              "styles": [
+                  "./node_modules/primeicons/primeicons.css",
+                  "./node_modules/primeng/resources/themes/arya-purple/theme.css",
+                  "./node_modules/primeng/resources/primeng.min.css",
+                  "./node_modules/primeflex/primeflex.css"
+              ]
           },
           "configurations": {
             "production": {
@@ -218,6 +225,9 @@
     "analytics": false,
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "cache": {
+      "enabled": false
+    }
   }
 }

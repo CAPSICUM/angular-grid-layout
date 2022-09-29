@@ -54,6 +54,7 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
     get dragStartThreshold(): number { return this._dragStartThreshold; }
 
     set dragStartThreshold(val: number) {
+        console.log("grid item component - dragStartThreshold", val)
         this._dragStartThreshold = coerceNumberProperty(val);
     }
 
@@ -108,6 +109,12 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
     }
 
     ngAfterContentInit() {
+        // You can pass a Subject as an Observer to an Observable:
+        // a Subject is also an Observer, and as a such, it implements the methods next, error and complete
+
+        // Passing a Subject as an Observer allows to convert the Observable’s behavior from unicast to multicast.
+        // Using a Subject is, indeed, the only way to make an Observable multicast,
+        // which means they will share the same execution with multiple Observers.
         this.subscriptions.push(
             this._dragStart$().subscribe(this.dragStartSubject),
             this._resizeStart$().subscribe(this.resizeStartSubject),
@@ -123,6 +130,7 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
         this.renderer.setStyle(this.elementRef.nativeElement, 'transform', `translateX(${left}) translateY(${top})`);
         this.renderer.setStyle(this.elementRef.nativeElement, 'display', `block`);
         this.renderer.setStyle(this.elementRef.nativeElement, 'transition', this.transition);
+        this.renderer.setStyle(this.elementRef.nativeElement, 'border', "solid 2px black");
         if (width != null) { this.renderer.setStyle(this.elementRef.nativeElement, 'width', width); }
         if (height != null) {this.renderer.setStyle(this.elementRef.nativeElement, 'height', height); }
     }
@@ -142,6 +150,7 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
                                 ktdMouseOrTouchDown(this.elementRef.nativeElement, 1)
                             ).pipe(
                                 exhaustMap((startEvent) => {
+                                    console.log('%c startEvent ', 'background: #222; color: #bada55', startEvent);
                                     // If the event started from an element with the native HTML drag&drop, it'll interfere
                                     // with our own dragging (e.g. `img` tags do it by default). Prevent the default action
                                     // to stop it from happening. Note that preventing on `dragstart` also seems to work, but
@@ -153,6 +162,8 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
                                     }
 
                                     const startPointer = ktdPointerClient(startEvent);
+                                    console.log('%c startPointer ', 'background: #222; color: #bada55', startPointer);
+
                                     return this.gridService.mouseOrTouchMove$(document).pipe(
                                         takeUntil(ktdMouseOrTouchEnd(document, 1)),
                                         ktdOutsideZone(this.ngZone),

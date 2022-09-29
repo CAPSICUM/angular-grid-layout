@@ -20,5 +20,6 @@ export const KTD_GRID_DRAG_HANDLE = new InjectionToken<KtdGridDragHandle>('KtdGr
 export class KtdGridDragHandle {
     constructor(
         public element: ElementRef<HTMLElement>) {
+        console.log("=== KtdGridDragHandle constructor")
     }
 }

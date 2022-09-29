@@ -22,5 +22,6 @@ export class KtdGridResizeHandle {
 
     constructor(
         public element: ElementRef<HTMLElement>) {
+        console.log("=== KtdGridResizeHandle constructor")
     }
 }

@@ -1,1 +1,33 @@
+<p style="color: black">Test V1.2</p><p-button (onClick)="display = true">Inspect</p-button>
 <ng-content></ng-content>
+<p-dialog header="Grid Component" [(visible)]="display">
+    <div class="grid">
+        <div class="col">compactOnPropsChange:</div>
+        <div class="col">{{compactOnPropsChange}}</div>
+    </div>
+    <div class="grid">
+        <div class="col">preventCollision:</div>
+        <div class="col">{{preventCollision}}</div>
+    </div>
+    <div class="grid">
+        <div class="col">scrollSpeed:</div>
+        <div class="col">{{scrollSpeed}}</div>
+    </div>
+    <div class="grid">
+        <div class="col">compactType:</div>
+        <div class="col">{{compactType}}</div>
+    </div>
+    <div class="grid">
+        <div class="col">rowHeight:</div>
+        <div class="col">{{rowHeight}}</div>
+    </div>
+    <div class="grid">
+        <div class="col">cols:</div>
+        <div class="col">{{cols}}</div>
+    </div>
+    <div class="grid">
+        <div class="col">layout:</div>
+        <div class="col">{{layout | json}}</div>
+    </div>
+
+</p-dialog>

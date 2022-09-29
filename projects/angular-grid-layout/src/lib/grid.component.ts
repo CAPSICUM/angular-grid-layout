@@ -5,7 +5,7 @@ import {
 import { coerceNumberProperty, NumberInput } from './coercion/number-property';
 import { KtdGridItemComponent } from './grid-item/grid-item.component';
 import { combineLatest, merge, NEVER, Observable, Observer, of, Subscription } from 'rxjs';
-import { exhaustMap, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { exhaustMap, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ktdGridItemDragging, ktdGridItemResizing } from './utils/grid.utils';
 import { compact, CompactType } from './utils/react-grid-layout.utils';
 import {
@@ -61,6 +61,7 @@ function getGridHeight(layout: KtdGridLayout, rowHeight: number): number {
 
 // eslint-disable-next-line @katoid/prefix-exported-code
 export function parseRenderItemToPixels(renderItem: KtdGridItemRenderData<number>): KtdGridItemRenderData<string> {
+    // console.log("angular-grid-layout - parseRenderItemToPixels", renderItem);
     return {
         id: renderItem.id,
         top: `${renderItem.top}px`,
@@ -200,7 +201,10 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
          * it is re-binded on the input.
          */
         this._layout = layout;
+        console.log("grid component layout input", layout)
     }
+
+    display = false;
 
     private _layout: KtdGridLayout;
 
@@ -222,6 +226,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                 private elementRef: ElementRef,
                 private renderer: Renderer2,
                 private ngZone: NgZone) {
+        console.log("***** Grid constructor v4")
 
     }
 
@@ -253,6 +258,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     }
 
     ngAfterContentInit() {
+        console.log("ngAfterContentInit")
         this.initSubscriptions();
     }
 
@@ -304,14 +310,24 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     }
 
     private initSubscriptions() {
+        console.log("angular-grid-layout - grid.component.ts - initSubscriptions()");
         this.subscriptions = [
             this._gridItems.changes.pipe(
                 startWith(this._gridItems),
+                tap(t => {
+                    console.log("tap after startWith", t)
+                }),
                 switchMap((gridItems: QueryList<KtdGridItemComponent>) => {
+                    const mergeA = gridItems.map((gridItem) => gridItem.dragStart$.pipe(map((event) => ({event, gridItem, type: 'drag'}))));
+                    const mergeB = gridItems.map((gridItem) => gridItem.resizeStart$.pipe(map((event) => ({event, gridItem, type: 'resize'}))));
                     return merge(
-                        ...gridItems.map((gridItem) => gridItem.dragStart$.pipe(map((event) => ({event, gridItem, type: 'drag'})))),
-                        ...gridItems.map((gridItem) => gridItem.resizeStart$.pipe(map((event) => ({event, gridItem, type: 'resize'})))),
-                    ).pipe(exhaustMap(({event, gridItem, type}) => {
+                        ...mergeA,
+                        ...mergeB
+                    ).pipe(
+                        tap(t => {
+                            console.log("=== tap after switchmap", t)
+                        }),
+                        exhaustMap(({event, gridItem, type}) => {
                         // Emit drag or resize start events. Ensure that is start event is inside the zone.
                         this.ngZone.run(() => (type === 'drag' ? this.dragStarted : this.resizeStarted).emit(getDragResizeEventData(gridItem, this.layout)));
                         // Get the correct newStateFunc depending on if we are dragging or resizing
@@ -325,6 +341,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                     }));
                 })
             ).subscribe(({layout, gridItem, type}) => {
+                console.log("angular-grid-layout - grid.component.ts - initSubscriptions() _gridItems.changes subscription", layout, gridItem, type)
                 this.layout = layout;
                 // Calculate new rendering data given the new layout.
                 this.calculateRenderData();

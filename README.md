@@ -17,6 +17,12 @@ npm build
 cd dist/angular-grid-layout
 npm pack
 
+---
+
+ng cache clean
+ng cache disable
+ng cache off
+
 ## Features
 - No dependencies
 - Draggable items

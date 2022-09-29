@@ -41,9 +41,13 @@ export class KtdGridService implements OnDestroy {
         this.touchMoveSubscription = this.ngZone.runOutsideAngular(() =>
             // The event handler has to be explicitly active,
             // because newer browsers make it passive by default.
-            fromEvent(document, 'touchmove', activeCapturingEventOptions as AddEventListenerOptions) // TODO: Fix rxjs typings, boolean should be a good param too.
-                .pipe(filter((touchEvent: TouchEvent) => touchEvent.touches.length === 1))
-                .subscribe((touchEvent: TouchEvent) => this.touchMoveSubject.next(touchEvent))
+            {
+                console.log("=== touchMoveSubscription - runOutsideAngular");
+                // fromEvent creates an Observable from DOM events, or Node.js EventEmitter events or others.
+                return fromEvent(document, 'touchmove', activeCapturingEventOptions as AddEventListenerOptions) // TODO: Fix rxjs typings, boolean should be a good param too.
+                    .pipe(filter((touchEvent: TouchEvent) => touchEvent.touches.length === 1))
+                    .subscribe((touchEvent: TouchEvent) => this.touchMoveSubject.next(touchEvent))
+            }
         );
     }
 }

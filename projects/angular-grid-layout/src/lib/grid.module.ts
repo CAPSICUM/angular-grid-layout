@@ -5,13 +5,15 @@ import { KtdGridItemComponent } from './grid-item/grid-item.component';
 import { KtdGridDragHandle } from './directives/drag-handle';
 import { KtdGridResizeHandle } from './directives/resize-handle';
 import { KtdGridService } from './grid.service';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
     declarations: [
         KtdGridComponent,
         KtdGridItemComponent,
         KtdGridDragHandle,
-        KtdGridResizeHandle
+        KtdGridResizeHandle,
     ],
     exports: [
         KtdGridComponent,
@@ -23,7 +25,7 @@ import { KtdGridService } from './grid.service';
         KtdGridService
     ],
     imports: [
-        CommonModule
+        CommonModule, ButtonModule, DialogModule
     ]
 })
 export class KtdGridModule {}

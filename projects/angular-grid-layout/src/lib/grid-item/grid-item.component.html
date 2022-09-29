@@ -1,2 +1,32 @@
 <ng-content></ng-content>
+<div class="grid" style="font-size: 8px; width: 100%; height: 100%; align-items: center">
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Drag Start Threshold</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{dragStartThreshold}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Draggable</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{draggable}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Resizable</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{resizable}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Width</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{elementRef.nativeElement.style.width}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Height</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{elementRef.nativeElement.style.height}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Transform</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{elementRef.nativeElement.style.transform}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Display</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{elementRef.nativeElement.style.display}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Transition</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{elementRef.nativeElement.style.transition}}</div>
+
+    <div class="col-3 p-0 pl-2" style="position:relative; text-align:start">Border</div>
+    <div class="col-9 p-0 pl-2" style="position:relative; text-align:start">{{elementRef.nativeElement.style.border}}</div>
+</div>
+
 <div #resizeElem class="grid-item-resize-icon"></div>

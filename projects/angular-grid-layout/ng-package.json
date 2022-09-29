@@ -3,5 +3,8 @@
   "dest": "../../dist/angular-grid-layout",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+    "allowedNonPeerDependencies": [
+        "@angular/cdk","font-awesome","primeicons","primeng","primeflex"
+    ]
 }

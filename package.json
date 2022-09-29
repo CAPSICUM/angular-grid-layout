@@ -7,7 +7,7 @@
         "build": "ng build",
         "build:demo-app": "ng build demo-app",
         "build:demo-app:prod": "ng build demo-app --configuration production",
-        "build:grid": "ng build angular-grid-layout",
+        "build:grid": "ng build angular-grid-layout && npm pack  ./dist/angular-grid-layout",
         "build:grid:watch": "ng build angular-grid-layout --watch",
         "build:grid:prod": "ng build --configuration production angular-grid-layout",
         "serve:demo-app": "http-server -p 1234 --proxy http://localhost:1234? -c-1 dist/demo-app",
@@ -23,7 +23,6 @@
     "private": true,
     "dependencies": {
         "@angular/animations": "^14.0.1",
-        "@angular/cdk": "^14.0.1",
         "@angular/common": "^14.0.1",
         "@angular/compiler": "^14.0.1",
         "@angular/core": "^14.0.1",
@@ -36,6 +35,9 @@
         "rxjs": "~6.6.0",
         "tslib": "^2.3.1",
         "zone.js": "~0.11.4"
+    },
+    "peerDependencies": {
+        "@angular/cdk": "^14.0.1"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^14.0.1",
